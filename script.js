@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // 1. INITIALIZE MAP (Only if on index.html)
     if (document.getElementById('live-map')) {
-        initSingaporeMap();
+        initBishanAMKMap();
     }
 
     // 2. INITIALIZE CAMERA SCANNER (Only if on scan.html)
@@ -25,35 +25,75 @@ function updatePointsUI() {
     }
 }
 
-// Map Engine Configuration
-function initSingaporeMap() {
-    // Centered around central Singapore area
+// Immersive Bishan-Ang Mo Kio Park Mapping Configuration
+function initBishanAMKMap() {
+    // Centered coordinates right over the Bishan-AMK Park River Plains section
+    const parkCenter = [1.3625, 103.8465];
+    
     const map = L.map('live-map', {
         zoomControl: false 
-    }).setView([1.2980, 103.8475], 13);
+    }).setView(parkCenter, 16); // Zoomed in closer for trail walk simulation
 
     // Load clean map styling templates
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: 'OpenStreetMap'
     }).addTo(map);
 
-    // Custom stylization icons for family landmarks
-    const customIcon = L.divIcon({
+    // --- ICON STYLES ---
+    
+    // 1. User Location Pin Icon (Blue Pulse Glow)
+    const userIcon = L.divIcon({
+        className: 'custom-map-user',
+        html: '<div class="map-user-inner"><i class="fas fa-circle"></i></div>',
+        iconSize: [30, 30]
+    });
+
+    // 2. QR Code Plaque Location Icon (Teal Color)
+    const qrIcon = L.divIcon({
+        className: 'custom-map-qr',
+        html: '<div class="map-qr-inner"><i class="fas fa-qrcode"></i></div>',
+        iconSize: [40, 40]
+    });
+
+    // 3. Activity / Quest Flag Icon (Coral Color)
+    const activityIcon = L.divIcon({
         className: 'custom-map-flag',
         html: '<div class="map-flag-inner"><i class="fas fa-flag"></i></div>',
         iconSize: [40, 40]
     });
 
-    // Marker 1: Fort Canning Park
-    const marker1 = L.marker([1.2942, 103.8463], {icon: customIcon}).addTo(map);
-    marker1.on('click', () => {
-        triggerQuest("Fort Canning Park Mystery");
+
+    // --- PLACING MARKERS ---
+
+    // Marker A: User Current Simulated Position (Near the River Plains Bridge)
+    L.marker([1.3622, 103.8460], {icon: userIcon}).addTo(map)
+     .bindPopup("<b>Your Family</b><br>Currently walking along the river stream.", {closeButton: false}).openPopup();
+
+    // Marker B: Hidden Physical QR Code Plaque (Near the Pond Gardens)
+    const qrMarker = L.marker([1.3632, 103.8445], {icon: qrIcon}).addTo(map);
+    qrMarker.on('click', () => {
+        showQuestAlert(
+            "QR Plaque Spotted! 🔍", 
+            "You found the 'River Eco-System' plaque hidden near the banks! Head over to the **Scan Screen** to turn on your camera and scan the code to unlock +250 points."
+        );
     });
 
-    // Marker 2: Singapore Botanic Gardens
-    const marker2 = L.marker([1.3138, 103.8159], {icon: customIcon}).addTo(map);
-    marker2.on('click', () => {
-        triggerQuest("Singapore Botanic Gardens Quest");
+    // Marker C: Activity Quest 1 - Water Playground
+    const activity1 = L.marker([1.3615, 103.8482], {icon: activityIcon}).addTo(map);
+    activity1.on('click', () => {
+        showQuestAlert(
+            "Family Mission: Water Works 💦", 
+            "Mission: Work together to count the total number of water sluice gates at the park's specialized Water Playground. Success unlocks the 'River Wanderer' badge!"
+        );
+    });
+
+    // Marker D: Activity Quest 2 - Recycle Hill Viewpoint
+    const activity2 = L.marker([1.3635, 103.8472], {icon: activityIcon}).addTo(map);
+    activity2.on('click', () => {
+        showQuestAlert(
+            "Family Mission: Summit Snapshot 📸", 
+            "Mission: Head up to the top of Recycle Hill next to the 'Anish Kapoor' sculpture. Take a group family selfie with the landscape valley background to log this memory!"
+        );
     });
 }
 
@@ -69,32 +109,28 @@ function startLiveCameraScanner() {
         aspectRatio: 1.0
     };
 
-    // Requests camera hardware components
     html5QrcodeScanner.start(
-        { facingMode: "environment" }, // Prioritizes back phone camera
+        { facingMode: "environment" }, 
         config,
         onQrCodeSuccess,
         onQrCodeError
     ).catch(err => {
-        console.log("Camera access blocked or running on an unhosted local file profile: ", err);
+        console.log("Camera access blocked or running on standard unsecure local profiles: ", err);
     });
 }
 
 function onQrCodeSuccess(decodedText, decodedResult) {
-    // Stops camera once a code is parsed to prevent looping lag
     html5QrcodeScanner.stop().then(() => {
         let currentPoints = parseInt(localStorage.getItem('goFamPoints'));
         currentPoints += 250;
         localStorage.setItem('goFamPoints', currentPoints);
         updatePointsUI();
 
-        showAlert("QR Code Verified! 🇸🇬", `Awesome find! Your family successfully discovered: "${decodedText}". You earned +250 points and a rare location badge!`);
+        showQuestAlert("QR Code Verified! 🇸🇬", `Awesome discover! You scanned the Bishan-AMK Park plaque: "${decodedText}". Your family earned +250 points!`);
     });
 }
 
-function onQrCodeError(errorMessage) {
-    // Keep scanning until match found, logs errors silently
-}
+function onQrCodeError(errorMessage) {}
 
 // Fallback Demo Simulators
 function simulateQRScan() {
@@ -106,28 +142,12 @@ function simulateQRScan() {
     localStorage.setItem('goFamPoints', currentPoints);
     updatePointsUI();
 
-    showAlert("QR Code Scanned!", "Success! You scanned the simulated Fort Canning Park plaque. Your family unlocked the 'Heritage Tree' badge and gained +250 points!");
+    showQuestAlert("QR Code Scanned!", "Success! You scanned the simulated Bishan-AMK River Plaque. Your family unlocked the 'River Wanderer' badge and gained +250 points!");
 }
 
-function triggerQuest(locationName) {
-    showAlert("Quest Found! 🇸🇬", `Your family is near ${locationName}. Track down the stylized physical QR code hidden along the trail to unlock the neighborhood mystery chapter!`);
-}
-
-function claimReward(cost, rewardName) {
-    let currentPoints = parseInt(localStorage.getItem('goFamPoints'));
-    if (currentPoints >= cost) {
-        currentPoints -= cost;
-        localStorage.setItem('goFamPoints', currentPoints);
-        updatePointsUI();
-        showAlert("Reward Claimed!", `Success! Your digital voucher for ${rewardName} has been generated.`);
-    } else {
-        showAlert("Insufficient Points", "Complete more park quests to collect points!");
-    }
-}
-
-function showAlert(title, message) {
-    document.getElementById('alert-title').innerText = title;
-    document.getElementById('alert-msg').innerText = message;
+function showQuestAlert(title, message) {
+    document.getElementById('alert-title').innerHTML = title;
+    document.getElementById('alert-msg').innerHTML = message;
     document.getElementById('custom-alert').classList.remove('hidden');
 }
 
