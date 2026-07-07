@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Fam ! - Rewards</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="phone-container">
+        <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons"><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-full"></i></div>
+        </div>
+
+        <header class="app-header">
+            <h1>Go Fam !</h1>
+            <div class="family-points"><i class="fas fa-star"></i> <span id="total-points">1,250</span> pts</div>
+        </header>
+
+        <main class="app-content content-padding">
+            <h2 class="section-title">Community Rewards</h2>
+            <div class="rewards-list">
+                <div class="reward-item">
+                    <div class="reward-info">
+                        <h3>$5 CDC Voucher</h3>
+                        <p>Cost: 500 points</p>
+                    </div>
+                    <button class="claim-btn" onclick="claimReward(500, '$5 CDC Voucher')">Claim</button>
+                </div>
+                <div class="reward-item">
+                    <div class="reward-info">
+                        <h3>$10 Grab Voucher</h3>
+                        <p>Cost: 1,000 points</p>
+                    </div>
+                    <button class="claim-btn" onclick="claimReward(1000, '$10 Grab Voucher')">Claim</button>
+                </div>
+                <div class="reward-item">
+                    <div class="reward-info">
+                        <h3>$20 FairPrice Voucher</h3>
+                        <p>Cost: 1,800 points</p>
+                    </div>
+                    <button class="claim-btn disabled">Locked</button>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Map</span>
+            </a>
+            <a href="scan.html" class="nav-item">
+                <div class="scan-nav-btn"><i class="fas fa-qrcode"></i></div>
+                <span>Scan</span>
+            </a>
+            <a href="badges.html" class="nav-item">
+                <i class="fas fa-medal"></i>
+                <span>Badges</span>
+            </a>
+            <a href="rewards.html" class="nav-item active">
+                <i class="fas fa-gift"></i>
+                <span>Rewards</span>
+            </a>
+        </nav>
+    </div>
+
+    <div id="custom-alert" class="hidden">
+        <div class="alert-content">
+            <h3 id="alert-title">Claimed</h3>
+            <p id="alert-msg">Message</p>
+            <button onclick="closeAlert()">Awesome!</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

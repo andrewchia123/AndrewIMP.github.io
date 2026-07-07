@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Fam ! - Map</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+    <div class="phone-container">
+        <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons"><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-full"></i></div>
+        </div>
+
+        <header class="app-header">
+            <h1>Go Fam !</h1>
+            <div class="family-points"><i class="fas fa-star"></i> <span id="total-points">1,250</span> pts</div>
+        </header>
+
+        <main class="app-content">
+            <div id="live-map"></div>
+            
+            <div class="map-overlay">
+                <h3>Current Area: Central Parks</h3>
+                <p>Tap a flag marker on the map to see the mystery clue!</p>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item active">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Map</span>
+            </a>
+            <a href="scan.html" class="nav-item">
+                <div class="scan-nav-btn"><i class="fas fa-qrcode"></i></div>
+                <span>Scan</span>
+            </a>
+            <a href="badges.html" class="nav-item">
+                <i class="fas fa-medal"></i>
+                <span>Badges</span>
+            </a>
+            <a href="rewards.html" class="nav-item">
+                <i class="fas fa-gift"></i>
+                <span>Rewards</span>
+            </a>
+        </nav>
+    </div>
+
+    <div id="custom-alert" class="hidden">
+        <div class="alert-content">
+            <h3 id="alert-title">Quest Found!</h3>
+            <p id="alert-msg">Message</p>
+            <button onclick="closeAlert()">Awesome!</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

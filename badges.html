@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Fam ! - Badges</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="phone-container">
+        <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons"><i class="fas fa-signal"></i> <i class="fas fa-wifi"></i> <i class="fas fa-battery-full"></i></div>
+        </div>
+
+        <header class="app-header">
+            <h1>Go Fam !</h1>
+            <div class="family-points"><i class="fas fa-star"></i> <span id="total-points">1,250</span> pts</div>
+        </header>
+
+        <main class="app-content content-padding">
+            <h2 class="section-title">Park Badges</h2>
+            <div class="badges-grid">
+                <div class="badge-card earned">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Heritage Tree</h3>
+                    <p>Botanic Gardens</p>
+                </div>
+                <div class="badge-card earned">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <h3>Coast Cruiser</h3>
+                    <p>East Coast Park</p>
+                </div>
+                <div class="badge-card locked">
+                    <i class="fas fa-feather-alt"></i>
+                    <h3>Mangrove Scout</h3>
+                    <p>Pasir Ris Park</p>
+                </div>
+                <div class="badge-card locked">
+                    <i class="fas fa-water"></i>
+                    <h3>River Wanderer</h3>
+                    <p>Bishan-AMK Park</p>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Map</span>
+            </a>
+            <a href="scan.html" class="nav-item">
+                <div class="scan-nav-btn"><i class="fas fa-qrcode"></i></div>
+                <span>Scan</span>
+            </a>
+            <a href="badges.html" class="nav-item active">
+                <i class="fas fa-medal"></i>
+                <span>Badges</span>
+            </a>
+            <a href="rewards.html" class="nav-item">
+                <i class="fas fa-gift"></i>
+                <span>Rewards</span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
