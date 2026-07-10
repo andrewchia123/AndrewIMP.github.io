@@ -385,6 +385,16 @@ body {
     margin-bottom: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.02);
 }
+/* Aesthetic Developer Settings Container Wrapper */
+.dev-panel-container {
+    background: #ffffff;
+    border: 1px dashed #ccc;
+    border-radius: 16px;
+    padding: 16px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
 .dev-panel-header {
     font-size: 12px;
     font-weight: 700;
@@ -421,4 +431,3 @@ body {
 .dev-reset-btn:active {
     background: #c0392b;
 }
-
