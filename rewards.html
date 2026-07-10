@@ -42,7 +42,7 @@
                         <h3>$20 FairPrice Voucher</h3>
                         <p>Cost: 1,800 points</p>
                     </div>
-                    <button class="claim-btn disabled">Locked</button>
+                    <button class="claim-btn" onclick="claimReward(1800, '$20 FairPrice Voucher')">Claim</button>
                 </div>
             </div>
         </main>
@@ -69,8 +69,8 @@
 
     <div id="custom-alert" class="hidden">
         <div class="alert-content">
-            <h3 id="alert-title">Claimed</h3>
-            <p id="alert-msg">Message</p>
+            <h3 id="alert-title">System Status</h3>
+            <p id="alert-msg">Notification Message Content</p>
             <button onclick="closeAlert()">Awesome!</button>
         </div>
     </div>
