@@ -164,3 +164,13 @@ function showQuestAlert(title, message) {
 function closeAlert() {
     document.getElementById('custom-alert').classList.add('hidden');
 }
+
+// Add this to the bottom of your script.js file
+function resetAppDevMode() {
+    localStorage.removeItem('goFamPoints');
+    localStorage.removeItem('riverWandererUnlocked');
+    
+    // Alert the user and reload the page to apply the 750 default points instantly
+    alert("App Reset Successful! Defaulting back to 750 points and locking all badges.");
+    window.location.reload();
+}
