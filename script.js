@@ -6,6 +6,7 @@ if (localStorage.getItem('riverWandererUnlocked') === null) {
     localStorage.setItem('riverWandererUnlocked', 'false');
 }
 
+// CRITICAL: This ensures your mobile screen updates every time you open a page!
 document.addEventListener("DOMContentLoaded", () => {
     updatePointsUI();
     
@@ -38,9 +39,14 @@ function updateBadgesUI() {
     const isUnlocked = localStorage.getItem('riverWandererUnlocked') === 'true';
     const badgeCard = document.getElementById('river-wanderer-card');
     
-    if (badgeCard && isUnlocked) {
-        badgeCard.classList.remove('locked');
-        badgeCard.classList.add('earned');
+    if (badgeCard) {
+        if (isUnlocked) {
+            badgeCard.classList.remove('locked');
+            badgeCard.classList.add('earned');
+        } else {
+            badgeCard.classList.remove('earned');
+            badgeCard.classList.add('locked');
+        }
     }
 }
 
@@ -97,7 +103,7 @@ function startLiveCameraScanner() {
         onQrCodeSuccess,
         (err) => {}
     ).catch(err => {
-        console.log("Camera access blocked or running on standard unsecure profile: ", err);
+        console.log("Camera access blocked: ", err);
     });
 }
 
@@ -121,10 +127,18 @@ function executeUnlockSequence() {
     currentPoints += 250;
     
     localStorage.setItem('goFamPoints', currentPoints);
-    localStorage.setItem('riverWandererUnlocked', 'true'); // Unlocks the badge!
+    localStorage.setItem('riverWandererUnlocked', 'true'); // Save badge status to storage
     updatePointsUI();
 
-    showQuestAlert("QR Code Verified! 🇸🇬", "Success! You scanned the Bishan-AMK River Plaque.<br><br>🎁 **+250 Points Added**<br>🏅 **'River Wanderer' Badge Unlocked!**");
+    // Changed button action to redirect straight to badges page so you can see it unlock!
+    document.getElementById('custom-alert').innerHTML = `
+        <div class="alert-content">
+            <h3 id="alert-title">QR Code Verified! 🇸🇬</h3>
+            <p id="alert-msg">Success! You scanned the Bishan-AMK River Plaque.<br><br>🎁 **+250 Points Added**<br>🏅 **'River Wanderer' Badge Unlocked!**</p>
+            <button onclick="window.location.href='badges.html'">View Badges</button>
+        </div>
+    `;
+    document.getElementById('custom-alert').classList.remove('hidden');
 }
 
 // Dynamic Reward Claiming Mechanics
@@ -134,7 +148,7 @@ function claimReward(cost, rewardName) {
     if (currentPoints >= cost) {
         currentPoints -= cost;
         localStorage.setItem('goFamPoints', currentPoints);
-        updatePointsUI();
+        updatePointsUI(); // Updates top bar point numbers immediately
         showQuestAlert("Reward Claimed! 🎉", `Success! Your digital voucher for **${rewardName}** has been generated. Enjoy your family reward!`);
     } else {
         showQuestAlert("Not Enough Points 🚫", `You need **${cost} points** to claim the ${rewardName}. Keep exploring Bishan-AMK Park to earn more points!`);
@@ -149,9 +163,4 @@ function showQuestAlert(title, message) {
 
 function closeAlert() {
     document.getElementById('custom-alert').classList.add('hidden');
-}
-
-function closeAlertAndRedirect(targetUrl) {
-    document.getElementById('custom-alert').classList.add('hidden');
-    window.location.href = targetUrl;
 }
