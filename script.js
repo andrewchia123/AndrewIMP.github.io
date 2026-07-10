@@ -134,7 +134,7 @@ function executeUnlockSequence() {
     document.getElementById('custom-alert').innerHTML = `
         <div class="alert-content">
             <h3 id="alert-title">QR Code Verified! 🇸🇬</h3>
-            <p id="alert-msg">Success! You scanned the Bishan-AMK River Plaque.<br><br>🎁 **+250 Points Added**<br>🏅 **'River Wanderer' Badge Unlocked!**</p>
+            <p id="alert-msg">Success! You scanned the Bishan-AMK River Plaque.<br><br> **+250 Points Added**<br> **'River Wanderer' Badge Unlocked!**</p>
             <button onclick="window.location.href='badges.html'">View Badges</button>
         </div>
     `;
@@ -170,7 +170,7 @@ function resetAppDevMode() {
     localStorage.removeItem('goFamPoints');
     localStorage.removeItem('riverWandererUnlocked');
     
-    // Alert the user and reload the page to apply the 750 default points instantly
+    
     alert("App Reset Successful! Defaulting back to 1250 points");
     window.location.reload();
 }
