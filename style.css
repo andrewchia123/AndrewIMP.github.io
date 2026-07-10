@@ -375,3 +375,50 @@ body {
     box-shadow: 0 0 12px rgba(52, 152, 219, 0.8);
 }
 
+/* Aesthetic Developer Settings Container Wrapper */
+.dev-panel-container {
+    background: #ffffff;
+    border: 1px dashed #ccc;
+    border-radius: 16px;
+    padding: 16px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+.dev-panel-header {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.dev-panel-container p {
+    font-size: 11px;
+    color: #777;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+.dev-reset-btn {
+    width: 100%;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+.dev-reset-btn:active {
+    background: #c0392b;
+}
+
