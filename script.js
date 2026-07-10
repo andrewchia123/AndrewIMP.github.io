@@ -171,6 +171,6 @@ function resetAppDevMode() {
     localStorage.removeItem('riverWandererUnlocked');
     
     // Alert the user and reload the page to apply the 750 default points instantly
-    alert("App Reset Successful! Defaulting back to 750 points and locking all badges.");
+    alert("App Reset Successful! Defaulting back to 1250 points");
     window.location.reload();
 }
